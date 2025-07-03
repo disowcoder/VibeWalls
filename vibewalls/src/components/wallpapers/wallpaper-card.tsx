@@ -42,7 +42,6 @@ export default function WallpaperCard({ wallpaper, onSelect }: WallpaperCardProp
         </div>
         {wallpaper.exclusive && (
           <Badge
-            variant="default"
             className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-pink-600 absolute top-2 right-2 bg-gradient-to-r from-pink-500 via-fuchsia-500 to-indigo-500 text-white shadow-lg animate-pulse"
           >
             New

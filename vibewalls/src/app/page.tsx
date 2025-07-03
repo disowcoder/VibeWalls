@@ -21,7 +21,7 @@ export default function Home() {
   // Listen for dialog close event from modal close button
   useEffect(() => {
     // Expose a global close handler for the dialog close button
-    (window as { [key: string]: any }).__closeWallpaperDialog = () => {
+    (window as unknown as { __closeWallpaperDialog?: () => void }).__closeWallpaperDialog = () => {
       setDialogOpen(false);
       setSelectedWallpaper(null);
     };
@@ -32,7 +32,7 @@ export default function Home() {
       document.body.style.overflow = '';
     }
     return () => {
-      delete (window as { [key: string]: any }).__closeWallpaperDialog;
+      delete (window as unknown as { __closeWallpaperDialog?: () => void }).__closeWallpaperDialog;
       document.body.style.overflow = '';
     };
   }, [dialogOpen]);

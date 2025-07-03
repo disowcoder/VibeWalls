@@ -45,8 +45,12 @@ export default function WallpaperDialog({ wallpaper, isOpen }: WallpaperDialogPr
 
   // Close handler for the X button
   const handleClose = () => {
-    if (typeof window !== 'undefined' && (window as { [key: string]: any }).__closeWallpaperDialog) {
-      (window as { [key: string]: any }).__closeWallpaperDialog();
+    if (
+      typeof window !== 'undefined' &&
+      '__closeWallpaperDialog' in window &&
+      typeof (window as unknown as { __closeWallpaperDialog?: () => void }).__closeWallpaperDialog === 'function'
+    ) {
+      (window as unknown as { __closeWallpaperDialog?: () => void }).__closeWallpaperDialog?.();
     }
   };
 
@@ -105,10 +109,10 @@ export default function WallpaperDialog({ wallpaper, isOpen }: WallpaperDialogPr
                   Download the wallpaper or open it in a new tab to customize.
                </p>
                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                 <Button onClick={handleDownload} size="lg" className="w-full flex items-center justify-center bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-lg shadow">
+                 <Button onClick={handleDownload} className="w-full flex items-center justify-center bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-lg shadow text-lg py-3">
                     <DownloadIcon className="mr-2 h-5 w-5" /> Download
                   </Button>
-                  <Button onClick={handleCustomize} size="lg" variant="secondary" className="w-full flex items-center justify-center border border-primary/30 bg-white dark:bg-[#232b3a] hover:bg-primary/10 text-primary font-semibold rounded-lg shadow">
+                  <Button onClick={handleCustomize} className="w-full flex items-center justify-center border border-primary/30 bg-white dark:bg-[#232b3a] hover:bg-primary/10 text-primary font-semibold rounded-lg shadow text-lg py-3">
                     <Brush className="mr-2 h-5 w-5" /> Customize
                   </Button>
                </div>
