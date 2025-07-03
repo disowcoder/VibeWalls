@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+  base = "vibewalls"
+
+[[plugins]]
+  package = "@netlify/next"
